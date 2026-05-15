@@ -933,124 +933,144 @@
 
     /* ── REGISTRATION MODAL ── */
     .modal-overlay {
-      display: none;
-      position: fixed; inset: 0; z-index: 1000;
-      background: rgba(6,14,34,0.75);
-      backdrop-filter: blur(4px);
-      align-items: flex-start;
-      justify-content: center;
-      padding: 2rem 1rem;
-      overflow-y: auto;
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(6,14,34,0.7); backdrop-filter: blur(5px);
+      align-items: flex-end; justify-content: center; padding: 0;
     }
     .modal-overlay.open { display: flex; }
     .modal {
-      background: var(--white);
-      border-radius: 20px;
-      width: 100%; max-width: 560px;
-      overflow: hidden;
-      box-shadow: 0 24px 64px rgba(6,14,34,0.4);
-      margin: auto;
+      background: var(--white); border-radius: 24px 24px 0 0;
+      width: 100%; max-width: 100%; max-height: 92vh;
+      overflow-y: auto; overflow-x: hidden;
+      box-shadow: 0 -8px 48px rgba(6,14,34,0.28);
+      animation: modal-up 0.28s cubic-bezier(0.32,0.72,0,1);
+    }
+    @keyframes modal-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    @media (min-width: 600px) {
+      .modal-overlay { align-items: center; padding: 1.5rem; }
+      .modal { border-radius: 24px; max-width: 540px; animation: modal-in 0.22s ease; }
+      @keyframes modal-in { from { transform: translateY(18px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     }
     .modal-head {
-      background: var(--blue-dark);
-      padding: 1.5rem 2rem;
-      position: relative;
+      background: linear-gradient(135deg, var(--blue-deep), var(--blue-dark));
+      border-radius: 24px 24px 0 0; padding: 1.5rem 1.4rem 1.4rem; position: relative;
     }
-    .modal-kicker {
-      display: inline-block;
-      font-family: 'Nunito', sans-serif; font-weight: 900;
-      font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--yellow);
-      background: rgba(255,194,51,0.15);
-      border: 1px solid rgba(255,194,51,0.35);
-      padding: 0.3rem 0.75rem; border-radius: 999px;
-      margin-bottom: 0.7rem;
+    @media (min-width: 600px) { .modal-head { border-radius: 24px 24px 0 0; padding: 1.8rem 1.8rem 1.6rem; } }
+    .modal-drag-bar { width: 40px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 2px; margin: 0 auto 1.1rem; }
+    @media (min-width: 600px) { .modal-drag-bar { display: none; } }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: rgba(255,255,255,0.15); border: none; cursor: pointer;
+      width: 34px; height: 34px; border-radius: 50%;
+      color: #fff; font-size: 1rem; display: flex; align-items: center;
+      justify-content: center; transition: background 0.15s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.28); }
+    .modal-badge {
+      display: inline-block; font-family: 'Nunito', sans-serif;
+      font-size: 0.7rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--yellow); background: rgba(255,194,51,0.15);
+      padding: 0.28rem 0.75rem; border-radius: 999px; margin-bottom: 0.6rem;
     }
     .modal-head h3 {
       font-family: 'Nunito', sans-serif; font-weight: 900;
-      font-size: 1.55rem; color: #fff;
-      line-height: 1.2; letter-spacing: -0.02em;
+      font-size: 1.45rem; color: #fff; line-height: 1.15; letter-spacing: -0.02em;
     }
-    .modal-close {
-      position: absolute; top: 1.1rem; right: 1.2rem;
-      background: rgba(255,255,255,0.15); border: none; cursor: pointer;
-      width: 34px; height: 34px; border-radius: 50%;
-      color: #fff; font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s;
-    }
-    .modal-close:hover { background: rgba(255,255,255,0.28); }
-    .modal-body { padding: 2rem; background: var(--cream); }
-    .form-section { margin-bottom: 1.8rem; }
-    .form-section:last-child { margin-bottom: 0; }
+    @media (min-width: 600px) { .modal-head h3 { font-size: 1.6rem; } }
+    .modal-head p { font-size: 0.85rem; color: rgba(255,255,255,0.72); margin-top: 0.35rem; font-weight: 500; }
+    .modal-body { padding: 1.4rem 1.2rem 2rem; background: var(--paper); }
+    @media (min-width: 600px) { .modal-body { padding: 1.8rem 2rem 2.2rem; } }
+    .form-row { display: grid; gap: 0.85rem; margin-bottom: 0.85rem; }
+    .form-row.two-col { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 480px) { .form-row.two-col { grid-template-columns: 1fr; } }
+    .form-divider { height: 1px; background: var(--border); margin: 1.4rem 0 1.2rem; }
     .form-section-label {
-      display: flex; align-items: center; gap: 0.55rem;
-      font-family: 'Nunito', sans-serif; font-size: 0.7rem; font-weight: 900;
-      letter-spacing: 0.13em; text-transform: uppercase; color: var(--blue);
-      margin-bottom: 1.1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      font-family: 'Nunito', sans-serif; font-size: 0.72rem; font-weight: 900;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.9rem;
     }
-    .form-section-label::before { content: ''; display: block; width: 18px; height: 2px; background: var(--blue); flex-shrink: 0; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-    .form-field { margin-bottom: 0.9rem; }
-    .form-field:last-child { margin-bottom: 0; }
-    .form-field label { display: block; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.82rem; color: var(--dark); margin-bottom: 0.35rem; }
-    .form-field input, .form-field select {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 2px solid var(--border); border-radius: 12px;
-      font-family: 'Open Sans', sans-serif; font-size: 0.9rem; color: var(--dark);
-      background: var(--white);
-      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
-      -webkit-appearance: none; appearance: none;
+    .form-section-label::before { content: ''; display: block; width: 14px; height: 3px; background: var(--blue); border-radius: 2px; flex-shrink: 0; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label { font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 800; color: var(--dark); }
+    .form-group input, .form-group select {
+      height: 52px; padding: 0 1.1rem; border: 1.5px solid #c2d1e8;
+      border-radius: 12px; font-family: 'Open Sans', sans-serif;
+      font-size: 0.96rem; font-weight: 500; color: var(--dark);
+      background: #fff; box-shadow: 0 1px 4px rgba(15,59,125,0.07);
+      transition: border-color 0.18s, box-shadow 0.18s; outline: none;
+      width: 100%; appearance: none; -webkit-appearance: none;
     }
-    .form-field input:focus, .form-field select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(31,91,173,0.12); }
-    .form-field input::placeholder { color: var(--gray-lt); }
-    .child-card {
-      background: var(--blue-lt);
-      border: 1.5px solid var(--blue-mid);
-      border-radius: 14px;
-      padding: 1.1rem 1.1rem 0.3rem;
-      margin-bottom: 0.8rem;
+    .form-group input::placeholder { color: #9eafc4; font-weight: 400; }
+    .form-group input:hover, .form-group select:hover { border-color: #8fafd8; }
+    .form-group input:focus, .form-group select:focus {
+      border-color: var(--blue); box-shadow: 0 0 0 3px rgba(31,91,173,0.14), 0 1px 4px rgba(15,59,125,0.07);
     }
-    .child-card-label {
-      display: flex; align-items: center; justify-content: space-between;
-      font-family: 'Nunito', sans-serif; font-weight: 900;
-      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--blue); margin-bottom: 0.85rem;
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%235a6478' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.8rem; cursor: pointer;
     }
-    .remove-child { background: none; border: none; cursor: pointer; color: var(--gray-lt); font-size: 1.2rem; padding: 0; line-height: 1; transition: color 0.2s; }
-    .remove-child:hover { color: var(--pink); }
+    .err-msg { font-size: 0.74rem; color: #d93025; font-weight: 700; display: none; }
+    .form-group.has-error .err-msg { display: block; }
+    .form-group.has-error input, .form-group.has-error select { border-color: #d93025; box-shadow: 0 0 0 3px rgba(217,48,37,0.12); }
+    .children-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
     .add-child-btn {
-      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
-      width: 100%; background: var(--white); border: 2px dashed var(--blue);
-      color: var(--blue); font-family: 'Nunito', sans-serif; font-weight: 900;
-      font-size: 0.84rem; padding: 0.6rem 1.1rem; border-radius: 999px;
-      cursor: pointer; transition: background 0.2s; margin-top: 0.2rem;
+      font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 900;
+      color: var(--blue); background: var(--blue-lt); border: 1.5px solid var(--blue-mid);
+      border-radius: 999px; padding: 0.38rem 0.9rem; cursor: pointer; transition: background 0.15s; white-space: nowrap;
     }
-    .add-child-btn:hover { background: var(--blue-lt); }
-    .modal-foot {
-      padding: 1.4rem 2rem 2rem;
-      background: var(--white);
-      border-top: 2px solid var(--border);
+    .add-child-btn:hover { background: var(--blue-mid); }
+    .child-row {
+      background: var(--blue-lt); border: 1.5px solid var(--blue-mid);
+      border-left: 4px solid var(--blue); border-radius: 0 12px 12px 0;
+      padding: 0.9rem 1rem 0.85rem 0.9rem; margin-bottom: 0.65rem;
     }
+    .child-row-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.7rem; }
+    .child-label { font-family: 'Nunito', sans-serif; font-size: 0.7rem; font-weight: 900; color: var(--blue-deep); letter-spacing: 0.12em; text-transform: uppercase; }
+    .child-remove {
+      background: none; border: none; cursor: pointer;
+      width: 28px; height: 28px; border-radius: 8px;
+      color: var(--gray-lt); font-size: 1.05rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: color 0.15s, background 0.15s;
+    }
+    .child-remove:hover { color: #e53e3e; background: rgba(229,62,62,0.1); }
+    .child-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+    .child-fields .form-group:first-child { grid-column: 1 / -1; }
+    .child-row .form-group input, .child-row .form-group select { height: 48px; font-size: 0.92rem; border-color: #b8ccdf; }
+    .submit-error {
+      display: none; align-items: flex-start; gap: 0.6rem;
+      background: #fff5f5; border: 1.5px solid #feb2b2; border-left: 4px solid #d93025;
+      border-radius: 10px; padding: 0.85rem 1rem;
+      font-size: 0.88rem; color: #c0392b; font-weight: 600; line-height: 1.5; margin-top: 1rem;
+    }
+    .submit-error.show { display: flex; }
     .modal-submit {
-      width: 100%; padding: 1rem;
-      background: var(--blue-dark); color: #fff;
-      font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.05rem;
-      border: none; border-radius: 14px; cursor: pointer;
-      box-shadow: 4px 4px 0 var(--orange);
+      width: 100%; height: 56px; border: none; cursor: pointer;
+      background: linear-gradient(135deg, var(--yellow), var(--yellow-deep));
+      color: var(--blue-dark); font-family: 'Nunito', sans-serif; font-weight: 900;
+      font-size: 1.1rem; border-radius: 14px;
+      box-shadow: 0 6px 22px rgba(255,194,51,0.45);
       transition: transform 0.15s, box-shadow 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 1.4rem;
     }
-    .modal-submit:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--orange); }
-    .modal-fine { text-align: center; font-size: 0.78rem; color: var(--gray-lt); margin-top: 0.85rem; line-height: 1.5; }
-    .modal-thankyou { display: none; padding: 3rem 2rem; text-align: center; background: var(--cream); }
-    .modal-thankyou.show { display: block; }
-    .modal-ty-icon { font-size: 3.5rem; margin-bottom: 1rem; }
-    .modal-ty-h { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.55rem; color: var(--blue-dark); margin-bottom: 0.5rem; }
-    .modal-ty-p { font-size: 0.95rem; color: var(--gray); line-height: 1.6; max-width: 360px; margin: 0 auto 1.5rem; }
-    @media (max-width: 720px) {
-      .modal-body { padding: 1.4rem; }
-      .modal-foot { padding: 1.2rem 1.4rem 1.6rem; }
-      .form-row { grid-template-columns: 1fr; }
+    .modal-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,194,51,0.5); }
+    .modal-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .modal-note { font-size: 0.74rem; color: var(--gray-lt); text-align: center; margin-top: 0.75rem; line-height: 1.5; }
+    .modal-success {
+      display: none; flex-direction: column; align-items: center;
+      padding: 2.5rem 1.5rem 3rem; text-align: center; gap: 0.9rem; background: var(--paper);
+    }
+    .modal-success.show { display: flex; }
+    .success-icon {
+      width: 70px; height: 70px; border-radius: 50%; background: var(--green); color: #fff;
+      display: flex; align-items: center; justify-content: center; font-size: 1.9rem;
+    }
+    .modal-success h3 { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.45rem; color: var(--dark); }
+    .modal-success p { font-size: 0.92rem; color: var(--gray); max-width: 300px; line-height: 1.65; }
+    .done-btn {
+      margin-top: 0.4rem; padding: 0.9rem 2.2rem;
+      background: var(--blue); color: #fff; border: none; cursor: pointer;
+      border-radius: 999px; font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1rem;
     }
 
     /* ── 3-LOCATION GRID ── */
@@ -1970,151 +1990,294 @@
 </div>
 
 <!-- ── REGISTRATION MODAL ── -->
-<div class="modal-overlay" id="regModal" onclick="if(event.target===this)closeModal()">
+<div class="modal-overlay" id="regModal">
   <div class="modal">
 
     <div class="modal-head">
-      <div class="modal-kicker">Summer Camp · 2026</div>
+      <div class="modal-drag-bar"></div>
+      <div class="modal-badge" id="modalBadge">Summer Camp · 2026</div>
       <h3>Reserve your child's spot</h3>
-      <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+      <p>Spots fill quickly — secure yours in 2 minutes.</p>
+      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
     </div>
 
-    <div id="regForm">
-      <div class="modal-body">
+    <div class="modal-body" id="leadFormWrap">
+      <form id="leadForm" novalidate>
 
-        <div class="form-section">
-          <div class="form-section-label">Parent / Guardian</div>
-          <div class="form-field">
-            <label for="parentName">Full Name</label>
-            <input type="text" id="parentName" placeholder="Your name" autocomplete="name" />
+        <div class="form-section-label">Parent / Guardian</div>
+        <div class="form-row">
+          <div class="form-group" id="fg-name">
+            <label for="f-name">Full Name</label>
+            <input type="text" id="f-name" placeholder="Your name" autocomplete="name" />
+            <span class="err-msg">Please enter your name.</span>
           </div>
-          <div class="form-row">
-            <div class="form-field">
-              <label for="parentPhone">Phone Number</label>
-              <input type="tel" id="parentPhone" placeholder="(778) 000-0000" autocomplete="tel" />
-            </div>
-            <div class="form-field">
-              <label for="parentEmail">Email Address</label>
-              <input type="email" id="parentEmail" placeholder="you@example.com" autocomplete="email" />
-            </div>
+        </div>
+        <div class="form-row two-col">
+          <div class="form-group" id="fg-phone">
+            <label for="f-phone">Phone Number</label>
+            <input type="tel" id="f-phone" placeholder="(778) 000-0000" autocomplete="tel" />
+            <span class="err-msg">Please enter a phone number.</span>
+          </div>
+          <div class="form-group" id="fg-email">
+            <label for="f-email">Email Address</label>
+            <input type="email" id="f-email" placeholder="you@example.com" autocomplete="email" />
+            <span class="err-msg">Please enter a valid email.</span>
           </div>
         </div>
 
-        <div class="form-section">
-          <div class="form-section-label" style="justify-content:space-between;">
-            <span style="display:flex;align-items:center;gap:0.55rem;">
-              <span style="display:block;width:18px;height:2px;background:var(--blue);flex-shrink:0;"></span>Child(ren)
-            </span>
-            <button type="button" class="add-child-btn" onclick="addChild()" style="width:auto;margin:0;padding:0.3rem 0.85rem;font-size:0.78rem;">+ Add Child</button>
-          </div>
-          <div id="childrenContainer"></div>
+        <div class="form-divider"></div>
+        <div class="children-header">
+          <div class="form-section-label" style="margin-bottom:0;">Child(ren)</div>
+          <button type="button" class="add-child-btn" id="addChildBtn">+ Add Child</button>
         </div>
+        <div id="childrenContainer"></div>
 
-        <div class="form-section">
-          <div class="form-section-label">Location &amp; Plan</div>
-          <div class="form-field">
-            <label for="regLocation">Preferred Location</label>
-            <select id="regLocation">
+        <div class="form-divider"></div>
+        <div class="form-section-label">Location &amp; Plan</div>
+        <div class="form-row">
+          <div class="form-group" id="fg-location">
+            <label for="f-location">Preferred Location</label>
+            <select id="f-location">
               <option value="">Select a location…</option>
-              <option value="fleetwood">Surrey Fleetwood — 16055 Fraser Hwy, Unit 101</option>
-              <option value="clayton">Surrey Clayton — 6820 188 Street, Unit 205</option>
-              <option value="citycentre">Surrey City Centre — 10070 King George Blvd, Unit 210</option>
+              <option value="Surrey - Fleetwood">Surrey — Fleetwood</option>
+              <option value="Surrey - Clayton">Surrey — Clayton</option>
+              <option value="Surrey - City Centre">Surrey — City Centre</option>
             </select>
+            <span class="err-msg">Please select a location.</span>
           </div>
-          <div class="form-field">
-            <label for="regPlan">Enrollment Plan</label>
-            <select id="regPlan">
+        </div>
+        <div class="form-row">
+          <div class="form-group" id="fg-plan">
+            <label for="f-plan">Enrollment Plan</label>
+            <select id="f-plan">
               <option value="">Select a plan…</option>
-              <option value="1wk">Single Week — $219/wk</option>
-              <option value="flex">Flex (2–3 wks) — $208/wk</option>
-              <option value="month">One Month (4 wks) — $197/wk · Most Popular</option>
-              <option value="extended">Extended Stay (5–6 wks) — $187/wk</option>
-              <option value="full">Full Summer (7–8 wks) — $177/wk</option>
+              <option value="Single Week — $219/wk">Single Week — $219/wk</option>
+              <option value="Flex 2–3 wks — $208/wk">Flex (2–3 wks) — $208/wk</option>
+              <option value="One Month 4 wks — $197/wk">One Month (4 wks) — $197/wk · Most Popular</option>
+              <option value="Extended Stay 5–6 wks — $187/wk">Extended Stay (5–6 wks) — $187/wk</option>
+              <option value="Full Summer 7–8 wks — $177/wk">Full Summer (7–8 wks) — $177/wk</option>
             </select>
+            <span class="err-msg">Please select a plan.</span>
           </div>
         </div>
 
-      </div>
+        <input type="hidden" id="f-program" value="Summer Camp" />
 
-      <div class="modal-foot">
-        <button class="modal-submit" onclick="submitForm()">Reserve My Spot →</button>
-        <p class="modal-fine">Our team will follow up within 1 business day to confirm your spot and collect the $100 deposit.</p>
-      </div>
+        <div class="submit-error" id="submitError">
+          <span>⚠️</span>
+          <span>Something went wrong. Please try again or call us directly.</span>
+        </div>
+
+        <button type="submit" class="modal-submit" id="modalSubmit">
+          <span id="submitLabel">Reserve My Spot →</span>
+        </button>
+        <p class="modal-note">🔒 Your info is private and never shared.</p>
+
+      </form>
     </div>
 
-    <div class="modal-thankyou" id="regThankyou">
-      <div class="modal-ty-icon">🎉</div>
-      <div class="modal-ty-h">You're on the list!</div>
-      <p class="modal-ty-p">Thanks! We'll reach out within 1 business day to confirm your child's spot and share next steps. Summer 2026, here we come!</p>
-      <button class="btn btn-primary" onclick="closeModal()">Done</button>
+    <div class="modal-success" id="modalSuccess">
+      <div class="success-icon">✓</div>
+      <h3>You're on the list!</h3>
+      <p id="successMsg">We'll reach out to confirm your spot.</p>
+      <button class="done-btn" id="modalDone">Done</button>
     </div>
 
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-  let childCount = 0;
+(function () {
+  var SUPA_URL  = 'https://orxzznhnuofefquyzkci.supabase.co';
+  var SUPA_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yeHp6bmhudW9mZWZxdXl6a2NpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcyNzgzMjgsImV4cCI6MjA3Mjg1NDMyOH0.e4diWXR55ksvB9vz9rO0FtisYVn0S87QLZvfNO2t6qU';
+  var sb = window.supabase.createClient(SUPA_URL, SUPA_ANON);
 
-  const grades = ['K','1','2','3','4','5','6','7','8'];
-  const gradeOpts = grades.map(g => `<option value="${g}">Grade ${g}</option>`).join('');
+  window.track = function (name, data) {
+    try { if (window.va) window.va('event', data ? { name: name, data: data } : { name: name }); } catch (e) {}
+  };
 
-  function openModal(location, plan) {
-    childCount = 0;
-    document.getElementById('childrenContainer').innerHTML = '';
-    document.getElementById('regForm').style.display = '';
-    document.getElementById('regThankyou').classList.remove('show');
-    document.getElementById('parentName').value = '';
-    document.getElementById('parentPhone').value = '';
-    document.getElementById('parentEmail').value = '';
-    document.getElementById('regLocation').value = location || '';
-    document.getElementById('regPlan').value = plan || '';
-    addChild();
-    document.getElementById('regModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
+  var overlay    = document.getElementById('regModal');
+  var formWrap   = document.getElementById('leadFormWrap');
+  var form       = document.getElementById('leadForm');
+  var success    = document.getElementById('modalSuccess');
+  var childCont  = document.getElementById('childrenContainer');
+  var submitted  = false;
+  var childIndex = 0;
+
+  var grades = ['K','1','2','3','4','5','6','7','8'];
+  function gradeOpts() {
+    return grades.map(function(g){ return '<option value="'+g+'">Grade '+g+'</option>'; }).join('');
   }
 
+  // Location/plan shorthand → display value maps
+  var locMap = {
+    'fleetwood':  'Surrey - Fleetwood',
+    'clayton':    'Surrey - Clayton',
+    'citycentre': 'Surrey - City Centre'
+  };
+  var planMap = {
+    '1wk':      'Single Week — $219/wk',
+    'flex':     'Flex 2–3 wks — $208/wk',
+    'month':    'One Month 4 wks — $197/wk',
+    'extended': 'Extended Stay 5–6 wks — $187/wk',
+    'full':     'Full Summer 7–8 wks — $177/wk'
+  };
+
+  window.openModal = function (location, plan) {
+    submitted  = false;
+    childIndex = 0;
+    childCont.innerHTML = '';
+    addChild();
+    form.reset();
+    document.getElementById('f-location').value = locMap[location] || location || '';
+    document.getElementById('f-plan').value      = planMap[plan]    || plan    || '';
+    formWrap.style.display = '';
+    success.classList.remove('show');
+    document.getElementById('submitError').classList.remove('show');
+    clearErrors();
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function(){ document.getElementById('f-name').focus(); }, 80);
+    window.track('Register Modal Opened', { program: 'Summer Camp', location: location || 'not_selected' });
+  };
+
   function closeModal() {
-    document.getElementById('regModal').classList.remove('open');
+    if (overlay.classList.contains('open') && !submitted) {
+      window.track('Modal Abandoned', { location: document.getElementById('f-location').value || 'not_selected' });
+    }
+    overlay.classList.remove('open');
     document.body.style.overflow = '';
   }
 
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalDone').addEventListener('click', function(){ overlay.classList.remove('open'); document.body.style.overflow = ''; });
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); });
+  document.getElementById('addChildBtn').addEventListener('click', addChild);
+
   function addChild() {
-    childCount++;
-    const card = document.createElement('div');
-    card.className = 'child-card';
-    card.id = 'child-' + childCount;
-    card.innerHTML =
-      '<div class="child-card-label"><span>Child ' + childCount + '</span>' +
-      (childCount > 1 ? '<button type="button" class="remove-child" onclick="removeChild(' + childCount + ')" aria-label="Remove child">×</button>' : '') +
+    childIndex++;
+    var row = document.createElement('div');
+    row.className = 'child-row';
+    row.innerHTML =
+      '<div class="child-row-header">' +
+        '<span class="child-label">CHILD ' + childIndex + '</span>' +
+        '<button type="button" class="child-remove" aria-label="Remove child">×</button>' +
       '</div>' +
-      '<div class="form-field"><label>Child\'s Name</label><input type="text" placeholder="First name" /></div>' +
-      '<div class="form-row">' +
-        '<div class="form-field"><label>Grade</label><select><option value="">Grade…</option>' + gradeOpts + '</select></div>' +
-        '<div class="form-field"><label>Age</label><input type="number" placeholder="8" min="6" max="13" /></div>' +
+      '<div class="child-fields">' +
+        '<div class="form-group"><label>Child\'s Name</label>' +
+          '<input type="text" data-child="name" placeholder="First name" />' +
+          '<span class="err-msg">Please enter name.</span></div>' +
+        '<div class="form-group"><label>Grade</label>' +
+          '<select data-child="grade"><option value="">Grade…</option>' + gradeOpts() + '</select>' +
+          '<span class="err-msg">Please select grade.</span></div>' +
+        '<div class="form-group"><label>Age</label>' +
+          '<input type="number" data-child="age" placeholder="8" min="6" max="13" />' +
+          '<span class="err-msg">Please enter age.</span></div>' +
       '</div>';
-    document.getElementById('childrenContainer').appendChild(card);
+    row.querySelector('.child-remove').addEventListener('click', function(){ row.remove(); refreshChildren(); });
+    childCont.appendChild(row);
+    refreshChildren();
   }
 
-  function removeChild(id) {
-    const el = document.getElementById('child-' + id);
-    if (el) el.remove();
+  function refreshChildren() {
+    var rows = childCont.querySelectorAll('.child-row');
+    rows.forEach(function(row, i){
+      row.querySelector('.child-label').textContent = 'CHILD ' + (i + 1);
+      row.querySelector('.child-remove').style.display = rows.length > 1 ? '' : 'none';
+    });
   }
 
-  function submitForm() {
-    const name = document.getElementById('parentName').value.trim();
-    const phone = document.getElementById('parentPhone').value.trim();
-    const email = document.getElementById('parentEmail').value.trim();
-    const location = document.getElementById('regLocation').value;
-    const plan = document.getElementById('regPlan').value;
-    if (!name || !phone || !email || !location || !plan) {
-      alert('Please fill in all required fields.');
+  function setError(id){ var el = document.getElementById(id); if (el) el.classList.add('has-error'); }
+  function clearErrors(){ document.querySelectorAll('.has-error').forEach(function(el){ el.classList.remove('has-error'); }); }
+
+  function validate() {
+    clearErrors();
+    var ok = true, failed = [];
+    if (!document.getElementById('f-name').value.trim())   { setError('fg-name');     failed.push('name');     ok = false; }
+    if (!document.getElementById('f-phone').value.trim())  { setError('fg-phone');    failed.push('phone');    ok = false; }
+    var em = document.getElementById('f-email').value.trim();
+    if (!em || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em))    { setError('fg-email');    failed.push('email');    ok = false; }
+    if (!document.getElementById('f-location').value)      { setError('fg-location'); failed.push('location'); ok = false; }
+    if (!document.getElementById('f-plan').value)          { setError('fg-plan');     failed.push('plan');     ok = false; }
+    childCont.querySelectorAll('.child-row').forEach(function(row, i){
+      var nEl = row.querySelector('[data-child="name"]');
+      var gEl = row.querySelector('[data-child="grade"]');
+      var aEl = row.querySelector('[data-child="age"]');
+      var p   = 'child' + (i + 1) + '_';
+      if (!nEl.value.trim()) { nEl.closest('.form-group').classList.add('has-error'); failed.push(p+'name');  ok = false; }
+      if (!gEl.value)        { gEl.closest('.form-group').classList.add('has-error'); failed.push(p+'grade'); ok = false; }
+      if (!aEl.value.trim()) { aEl.closest('.form-group').classList.add('has-error'); failed.push(p+'age');   ok = false; }
+    });
+    if (!ok) window.track('Form Validation Error', { fields: failed.join(',') });
+    return ok;
+  }
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    if (!validate()) return;
+
+    var btn   = document.getElementById('modalSubmit');
+    var label = document.getElementById('submitLabel');
+    btn.disabled = true;
+    label.textContent = 'Submitting…';
+
+    var children = [];
+    childCont.querySelectorAll('.child-row').forEach(function(row){
+      children.push({
+        name:  row.querySelector('[data-child="name"]').value.trim(),
+        grade: row.querySelector('[data-child="grade"]').value,
+        age:   row.querySelector('[data-child="age"]').value.trim(),
+      });
+    });
+
+    var _params = new URLSearchParams(window.location.search);
+    var payload = {
+      name:           document.getElementById('f-name').value.trim(),
+      email:          document.getElementById('f-email').value.trim(),
+      phone:          document.getElementById('f-phone').value.trim(),
+      location:       document.getElementById('f-location').value,
+      program:        document.getElementById('f-program').value,
+      plan:           document.getElementById('f-plan').value,
+      children:       children,
+      page_url:       window.location.href,
+      traffic_source: sessionStorage.getItem('traffic_source') || 'direct',
+      referrer:       document.referrer || null,
+      utm_medium:     _params.get('utm_medium') || null,
+      utm_campaign:   _params.get('utm_campaign') || null,
+    };
+
+    var result = await sb.from('program_leads').insert(payload);
+
+    btn.disabled = false;
+    label.textContent = 'Reserve My Spot →';
+
+    if (result.error) {
+      document.getElementById('submitError').classList.add('show');
+      window.track('Lead Submit Failed', { location: payload.location });
+      console.error('[lead submit]', result.error.message);
       return;
     }
-    document.getElementById('regForm').style.display = 'none';
-    document.getElementById('regThankyou').classList.add('show');
-  }
 
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+    document.getElementById('submitError').classList.remove('show');
+    submitted = true;
+    window.track('Lead Submitted', {
+      program:        payload.program,
+      location:       payload.location,
+      plan:           payload.plan,
+      child_count:    String(children.length),
+      traffic_source: sessionStorage.getItem('traffic_source') || 'direct',
+    });
+
+    var nameStr = children.length === 1 ? children[0].name + "'s spot" : "your children's spots";
+    document.getElementById('successMsg').textContent =
+      'Thanks! Someone from Best Brains ' + payload.location + ' will reach out to confirm ' + nameStr + '.';
+
+    formWrap.style.display = 'none';
+    success.classList.add('show');
+  });
+})();
 </script>
 
 </body>
