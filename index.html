@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Summer Camp 2026 | Best Brains Surrey Fleetwood</title>
+  <title>Summer Camp 2026 | Best Brains Surrey — Fleetwood, Clayton & City Centre</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;600;700;800;900;1000&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -899,6 +899,65 @@
     .footer-bottom a { color: rgba(255,255,255,0.5); font-size: 0.8rem; text-decoration: none; font-weight: 600; }
     .footer-bottom a:hover { color: var(--yellow); }
 
+    /* ── 3-LOCATION GRID ── */
+    .loc-wrap-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* ── PAST EVENTS / INSTAGRAM ── */
+    .insta-section { background: var(--paper); }
+    .insta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.3rem;
+    }
+    .insta-post {
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .insta-post:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(15,59,125,0.12); }
+    .insta-img {
+      height: 190px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem;
+      position: relative;
+    }
+    .insta-img::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.15) 1.5px, transparent 1.5px);
+      background-size: 14px 14px;
+      pointer-events: none;
+    }
+    .insta-body { padding: 1rem 1.1rem 1.2rem; }
+    .insta-loc-tag {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      background: var(--cream); border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.22rem 0.65rem;
+      font-family: 'Nunito', sans-serif; font-size: 0.68rem; font-weight: 900;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray);
+      margin-bottom: 0.55rem;
+    }
+    .insta-year { float: right; font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--orange-dk); font-weight: 700; }
+    .insta-caption { font-size: 0.87rem; color: var(--dark); line-height: 1.55; font-weight: 500; margin-bottom: 0.8rem; }
+    .insta-caption strong { font-weight: 800; color: var(--blue-dark); }
+    .insta-foot { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 0.7rem; }
+    .insta-stats { display: flex; gap: 1rem; font-size: 0.82rem; color: var(--gray-lt); font-weight: 600; }
+    .insta-stats span { display: inline-flex; align-items: center; gap: 0.3rem; }
+    .insta-view { font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 900; color: var(--blue); text-decoration: none; letter-spacing: 0.02em; }
+    .insta-view:hover { color: var(--orange); }
+    .insta-follow-row { text-align: center; margin-top: 2.6rem; display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; align-items: center; }
+    .insta-follow-row p { font-size: 0.9rem; color: var(--gray); font-weight: 600; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -912,6 +971,8 @@
       .policies-grid { grid-template-columns: 1fr 1fr; }
       .disc-grid { grid-template-columns: 1fr; }
       .loc-wrap { grid-template-columns: 1fr; }
+      .loc-wrap-3 { grid-template-columns: 1fr; }
+      .insta-grid { grid-template-columns: 1fr 1fr; }
       .nav-links { gap: 1.1rem; }
     }
     @media (max-width: 720px) {
@@ -961,6 +1022,7 @@
       .cta-band h2 { font-size: clamp(1.7rem, 7vw, 2.2rem); }
       .cta-actions .btn { width: 100%; justify-content: center; }
 
+      .insta-grid { grid-template-columns: 1fr; }
       .footer-locations { padding: 3rem 5% 0; }
       .footer-bottom { justify-content: center; text-align: center; }
     }
@@ -970,10 +1032,10 @@
 
 <!-- ── TOP BAR ── -->
 <div class="top-bar">
-  <span class="top-bar-left">📍 Best Brains Learning Center — Surrey Fleetwood</span>
+  <span class="top-bar-left">📍 Best Brains Learning Center — 3 Surrey Locations</span>
   <div class="top-bar-right">
+    <a href="#locations">Fleetwood · Clayton · City Centre</a>
     <a href="tel:7786284516">📞 (778) 628-4516</a>
-    <a href="mailto:surreyfleetwood@bestbrains.com">✉️ surreyfleetwood@bestbrains.com</a>
   </div>
 </div>
 
@@ -990,7 +1052,7 @@
     <li><a href="#themes">Weekly Themes</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#compare">Why Best Brains</a></li>
-    <li><a href="#location">Visit</a></li>
+    <li><a href="#locations">Locations</a></li>
     <li><a href="#register" class="nav-cta">Enroll Now</a></li>
   </ul>
 </nav>
@@ -1043,8 +1105,8 @@
           <div class="hcs-val">4 full hrs<small>academics + play</small></div>
         </div>
         <div class="hcs">
-          <div class="hcs-lbl">Location</div>
-          <div class="hcs-val">Fleetwood<small>Surrey, BC</small></div>
+          <div class="hcs-lbl">Locations</div>
+          <div class="hcs-val">3 Sites<small>Surrey, BC</small></div>
         </div>
       </div>
 
@@ -1407,14 +1469,14 @@
   <div class="section-inner">
     <div class="section-tag">why best brains &mdash;</div>
     <h2 class="st">Most summer programs do <em>one thing.</em> We do four.</h2>
-    <p class="section-sub">Best Brains Fleetwood is the only program in Surrey that combines academic reinforcement, creative development, and physical activity — every single day.</p>
+    <p class="section-sub">Best Brains Surrey is the only program in the area that combines academic reinforcement, creative development, and physical activity — every single day.</p>
 
     <div class="compare-wrap">
       <table class="compare-table">
         <thead>
           <tr>
             <th></th>
-            <th class="col-us">⭐ Best Brains Fleetwood</th>
+            <th class="col-us">⭐ Best Brains Surrey</th>
             <th>🎨 Arts &amp; Creativity Camps</th>
             <th>💻 STEM / Coding Camps</th>
             <th>🏕 Recreation Camps</th>
@@ -1543,6 +1605,116 @@
   </div>
 </section>
 
+<!-- ── PAST EVENTS / INSTAGRAM ── -->
+<section class="insta-section">
+  <div class="section-inner">
+    <div class="section-tag">past camp highlights &mdash;</div>
+    <h2 class="st">See what summer looks like <em>at Best Brains.</em></h2>
+    <p class="section-sub">Real moments from past summers across our Surrey locations. Follow us on Instagram to stay up to date with this year's camp.</p>
+
+    <div class="insta-grid">
+
+      <div class="insta-post">
+        <div class="insta-img" style="background: linear-gradient(135deg, #ed7d31, #c45f1c);">🎨</div>
+        <div class="insta-body">
+          <div><span class="insta-loc-tag">📍 Fleetwood</span><span class="insta-year">2025</span></div>
+          <div class="insta-caption"><strong>Creative Art Lab week</strong> was a blast! Our campers turned into little Picassos — watercolors, clay, and mixed-media masterpieces went home every single day. 🖌️</div>
+          <div class="insta-foot">
+            <div class="insta-stats">
+              <span>❤️ 142</span>
+              <span>💬 18</span>
+            </div>
+            <a href="https://www.instagram.com/bestbrainsfleetwood/" target="_blank" rel="noopener" class="insta-view">View post →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="insta-post">
+        <div class="insta-img" style="background: linear-gradient(135deg, #1f5bad, #0f3b7d);">🧠</div>
+        <div class="insta-body">
+          <div><span class="insta-loc-tag">📍 Clayton</span><span class="insta-year">2025</span></div>
+          <div class="insta-caption">Logic puzzles, riddles, and strategy games — <strong>Brain Boosters week</strong> had everyone thinking hard and laughing harder! Shoutout to this crew for crushing every challenge. 🏆</div>
+          <div class="insta-foot">
+            <div class="insta-stats">
+              <span>❤️ 98</span>
+              <span>💬 11</span>
+            </div>
+            <a href="https://www.instagram.com/bestbrainsclayton/" target="_blank" rel="noopener" class="insta-view">View post →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="insta-post">
+        <div class="insta-img" style="background: linear-gradient(135deg, #2bb673, #1f8a55);">🏃</div>
+        <div class="insta-body">
+          <div><span class="insta-loc-tag">📍 City Centre</span><span class="insta-year">2025</span></div>
+          <div class="insta-caption">Sports Day week took it to another level! Relay races, team challenges, and a LOT of high-fives. <strong>Physical Activities hour</strong> is always a highlight. 🤸</div>
+          <div class="insta-foot">
+            <div class="insta-stats">
+              <span>❤️ 176</span>
+              <span>💬 24</span>
+            </div>
+            <a href="https://www.instagram.com/bestbrainssurreycc/" target="_blank" rel="noopener" class="insta-view">View post →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="insta-post">
+        <div class="insta-img" style="background: linear-gradient(135deg, #f5a623, #d68910);">✂️</div>
+        <div class="insta-body">
+          <div><span class="insta-loc-tag">📍 Fleetwood</span><span class="insta-year">2024</span></div>
+          <div class="insta-caption">Look what went home this week! Every day of <strong>DIY Craft Week</strong> campers brought home something they made with their own hands. This is what we love about camp. 💛</div>
+          <div class="insta-foot">
+            <div class="insta-stats">
+              <span>❤️ 213</span>
+              <span>💬 31</span>
+            </div>
+            <a href="https://www.instagram.com/bestbrainsfleetwood/" target="_blank" rel="noopener" class="insta-view">View post →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="insta-post">
+        <div class="insta-img" style="background: linear-gradient(135deg, #e8336b, #b71a4d);">⭐</div>
+        <div class="insta-body">
+          <div><span class="insta-loc-tag">📍 Clayton</span><span class="insta-year">2024</span></div>
+          <div class="insta-caption">Final week <strong>Talent Showcase</strong> — the moment everything comes together. Campers performed what they're proud of in front of families. Proud of every single one of them. 🎉</div>
+          <div class="insta-foot">
+            <div class="insta-stats">
+              <span>❤️ 304</span>
+              <span>💬 47</span>
+            </div>
+            <a href="https://www.instagram.com/bestbrainsclayton/" target="_blank" rel="noopener" class="insta-view">View post →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="insta-post">
+        <div class="insta-img" style="background: linear-gradient(135deg, #1f5bad, #ed7d31);">🎤</div>
+        <div class="insta-body">
+          <div><span class="insta-loc-tag">📍 City Centre</span><span class="insta-year">2024</span></div>
+          <div class="insta-caption"><strong>Speak &amp; Shine week</strong> — watching kids who were nervous to talk in front of 2 people stand up and own the room by Friday. Never gets old. 🙌</div>
+          <div class="insta-foot">
+            <div class="insta-stats">
+              <span>❤️ 187</span>
+              <span>💬 29</span>
+            </div>
+            <a href="https://www.instagram.com/bestbrainssurreycc/" target="_blank" rel="noopener" class="insta-view">View post →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="insta-follow-row">
+      <p>Follow us for more camp moments →</p>
+      <a href="https://www.instagram.com/bestbrainsfleetwood/" target="_blank" rel="noopener" class="soc-btn soc-ig">◎ @bestbrainsfleetwood</a>
+      <a href="https://www.instagram.com/bestbrainsclayton/" target="_blank" rel="noopener" class="soc-btn soc-ig">◎ @bestbrainsclayton</a>
+      <a href="https://www.instagram.com/bestbrainssurreycc/" target="_blank" rel="noopener" class="soc-btn soc-ig">◎ @bestbrainssurreycc</a>
+    </div>
+  </div>
+</section>
+
 <!-- ── CTA BAND ── -->
 <div class="cta-band" id="register">
   <div class="cta-inner">
@@ -1550,18 +1722,19 @@
     <h2>Ready to lock in your <span class="hl">summer plan?</span></h2>
     <p>Summer runs <strong>Jul 6 – Aug 28, 2026</strong>. Plans start at <strong>$177/week</strong> for full-summer enrollment. Early-bird registration ends <strong>May 15</strong> — spots fill quickly for July.</p>
     <div class="cta-actions">
-      <a href="#location" class="btn btn-primary">Enroll at Fleetwood ↓</a>
+      <a href="#locations" class="btn btn-primary">See All 3 Locations ↓</a>
       <a href="tel:7786284516" class="btn btn-ghost">📞 (778) 628-4516</a>
     </div>
   </div>
 </div>
 
-<!-- ── FOOTER LOCATION ── -->
-<div class="footer-locations" id="location">
+<!-- ── FOOTER LOCATIONS ── -->
+<div class="footer-locations" id="locations">
   <div class="footer-loc-title">visit, call, or register online &mdash;</div>
-  <h2 class="footer-loc-h2">One Surrey location &mdash; <em>endless summer.</em></h2>
-  <div class="loc-wrap">
+  <h2 class="footer-loc-h2">Three Surrey locations &mdash; <em>endless summer.</em></h2>
+  <div class="loc-wrap-3">
 
+    <!-- Fleetwood -->
     <div class="loc-card">
       <div class="loc-name">📍 Best Brains · Surrey Fleetwood</div>
       <div class="loc-row"><span class="ic">🏢</span><p>16055 Fraser Hwy, Unit 101<br/>Surrey, BC V4N 0G3</p></div>
@@ -1581,21 +1754,65 @@
         <a href="https://www.instagram.com/bestbrainsfleetwood/" target="_blank" rel="noopener" class="soc-btn soc-ig">◎ Instagram</a>
         <a href="https://maps.app.goo.gl/oK9rf37Wy3tAKJ446" target="_blank" rel="noopener" class="soc-btn soc-gm">📍 Google Map</a>
       </div>
-      <a href="https://bestbrains.com/ca-en/surrey-fleetwood/new-registration" target="_blank" rel="noopener" class="loc-reg">Enroll for Summer Camp →</a>
+      <a href="https://bestbrains.com/ca-en/surrey-fleetwood/new-registration" target="_blank" rel="noopener" class="loc-reg">Enroll at Fleetwood →</a>
     </div>
 
-    <iframe class="map-embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Best Brains Fleetwood"
-      src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10437.12773579469!2d-122.7771558!3d49.1572566!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5485d10e231b1a6f%3A0x99120f92f48d8965!2sBest%20Brains%20Learning%20Center%20-%20Surrey%20Fleetwood!5e0!3m2!1sen!2sin!4v1754319121564!5m2!1sen!2sin" allowfullscreen></iframe>
+    <!-- Clayton -->
+    <div class="loc-card">
+      <div class="loc-name">📍 Best Brains · Surrey Clayton</div>
+      <div class="loc-row"><span class="ic">🏢</span><p>6820 188 Street, Unit 205<br/>Surrey, BC V4N 3G6</p></div>
+      <div class="loc-row"><span class="ic">📞</span><a href="tel:7786744516">(778) 674-4516</a></div>
+      <div class="loc-row"><span class="ic">✉️</span><a href="mailto:surreyclayton@bestbrains.com">surreyclayton@bestbrains.com</a></div>
+      <div class="loc-hours">
+        <h5>Summer Camp Hours · Jul 6 – Aug 28</h5>
+        <div class="hour-row"><span>Monday – Friday</span><span>12:00 – 4:00 PM</span></div>
+        <div class="hour-row"><span>Saturday &amp; Sunday</span><span>Closed</span></div>
+      </div>
+      <div class="loc-hours">
+        <h5>Reviews</h5>
+        <div class="hour-row"><span>Google</span><span>★ 4.9 · 89 reviews</span></div>
+      </div>
+      <div class="loc-social">
+        <a href="https://www.facebook.com/BBSurreyClayton" target="_blank" rel="noopener" class="soc-btn soc-fb">f Facebook</a>
+        <a href="https://www.instagram.com/bestbrainsclayton/" target="_blank" rel="noopener" class="soc-btn soc-ig">◎ Instagram</a>
+        <a href="https://maps.google.com/?q=6820+188+Street+Unit+205+Surrey+BC" target="_blank" rel="noopener" class="soc-btn soc-gm">📍 Google Map</a>
+      </div>
+      <a href="https://bestbrains.com/ca-en/surrey-clayton/new-registration" target="_blank" rel="noopener" class="loc-reg">Enroll at Clayton →</a>
+    </div>
+
+    <!-- City Centre -->
+    <div class="loc-card">
+      <div class="loc-name">📍 Best Brains · Surrey City Centre</div>
+      <div class="loc-row"><span class="ic">🏢</span><p>10070 King George Blvd, Unit 210<br/>Surrey, BC V3T 2W4</p></div>
+      <div class="loc-row"><span class="ic">📞</span><a href="tel:7788771781">(778) 877-1781</a></div>
+      <div class="loc-row"><span class="ic">✉️</span><a href="mailto:surreycitycentre@bestbrains.com">surreycitycentre@bestbrains.com</a></div>
+      <div class="loc-hours">
+        <h5>Summer Camp Hours · Jul 6 – Aug 28</h5>
+        <div class="hour-row"><span>Monday – Friday</span><span>12:00 – 4:00 PM</span></div>
+        <div class="hour-row"><span>Saturday &amp; Sunday</span><span>Closed</span></div>
+      </div>
+      <div class="loc-hours">
+        <h5>Reviews</h5>
+        <div class="hour-row"><span>Google</span><span>★ 4.9 · 89 reviews</span></div>
+      </div>
+      <div class="loc-social">
+        <a href="https://www.facebook.com/BBSurreyCityCentre" target="_blank" rel="noopener" class="soc-btn soc-fb">f Facebook</a>
+        <a href="https://www.instagram.com/bestbrainssurreycc/" target="_blank" rel="noopener" class="soc-btn soc-ig">◎ Instagram</a>
+        <a href="https://maps.google.com/?q=10070+King+George+Blvd+Unit+210+Surrey+BC" target="_blank" rel="noopener" class="soc-btn soc-gm">📍 Google Map</a>
+      </div>
+      <a href="https://bestbrains.com/ca-en/surrey-city-centre/new-registration" target="_blank" rel="noopener" class="loc-reg">Enroll at City Centre →</a>
+    </div>
+
   </div>
 </div>
 
 <div class="footer-bottom">
   <div class="ft-logo">
     <img src="assets/bb-icon.png" alt="" style="height: 34px; width: auto; display: block;" />
-    <span style="line-height: 1.1; color:#fff;">Best Brains <span style="color: var(--orange);">Surrey Fleetwood</span></span>
+    <span style="line-height: 1.1; color:#fff;">Best Brains <span style="color: var(--orange);">Surrey</span></span>
   </div>
-  <p>© 2026 Best Brains Learning Centers. Surrey Fleetwood · Summer Camp 2026.</p>
-  <a href="https://bestbrains.com/ca-en/surrey-fleetwood" target="_blank" rel="noopener">bestbrains.com →</a>
+  <p>© 2026 Best Brains Learning Centers. Fleetwood · Clayton · City Centre · Summer Camp 2026.</p>
+  <a href="https://bestbrains.com/ca-en" target="_blank" rel="noopener">bestbrains.com →</a>
 </div>
 
 </body>
