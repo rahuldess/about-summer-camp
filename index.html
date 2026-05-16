@@ -2157,6 +2157,11 @@
     document.body.style.overflow = 'hidden';
     setTimeout(function(){ document.getElementById('f-name').focus(); }, 80);
     window.track('Register Modal Opened', { program: 'Summer Camp', location: location || 'not_selected' });
+    if (window.fbq) fbq('track', 'InitiateCheckout', {
+      content_name:     'Summer Camp 2026',
+      content_category: locMap[location] || location || 'not_selected',
+      num_items:        1,
+    });
   };
 
   function closeModal() {
@@ -2287,7 +2292,19 @@
       traffic_source: sessionStorage.getItem('traffic_source') || 'direct',
     });
 
-    if (window.fbq) fbq('track', 'Lead', { content_name: 'Summer Camp 2026', content_category: payload.location });
+    var planValues = {
+      'Single Week — $219/wk':             219,
+      'Flex 2–3 wks — $208/wk':            520,
+      'One Month 4 wks — $197/wk':         788,
+      'Extended Stay 5–6 wks — $187/wk':  1029,
+      'Full Summer 7–8 wks — $177/wk':    1328,
+    };
+    if (window.fbq) fbq('track', 'Lead', {
+      content_name:     'Summer Camp 2026',
+      content_category: payload.location,
+      value:            planValues[payload.plan] || 0,
+      currency:         'CAD',
+    });
 
     var nameStr = children.length === 1 ? children[0].name + "'s spot" : "your children's spots";
     document.getElementById('successMsg').textContent =
@@ -2296,6 +2313,67 @@
     formWrap.style.display = 'none';
     success.classList.add('show');
   });
+
+  // ── PASSIVE TRACKING ────────────────────────────────────────────────────────
+
+  // ViewContent — pricing section scrolls into view (fires once)
+  var pricingEl = document.getElementById('pricing');
+  if (pricingEl && window.IntersectionObserver) {
+    new IntersectionObserver(function(entries, obs) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          if (window.fbq) fbq('track', 'ViewContent', {
+            content_name:     'Pricing Section',
+            content_category: 'Summer Camp 2026',
+          });
+          obs.unobserve(pricingEl);
+        }
+      });
+    }, { threshold: 0.3 }).observe(pricingEl);
+  }
+
+  // Contact — phone & email link clicks
+  document.querySelectorAll('a[href^="tel:"], a[href^="mailto:"]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      if (window.fbq) fbq('track', 'Contact', {
+        content_name: el.href.startsWith('tel:') ? 'Phone' : 'Email',
+        content_category: 'Summer Camp 2026',
+      });
+    });
+  });
+
+  // PlanSelected — plan dropdown change inside modal (fires on each change)
+  document.getElementById('f-plan').addEventListener('change', function() {
+    if (!this.value) return;
+    if (window.fbq) fbq('trackCustom', 'PlanSelected', {
+      plan:             this.value,
+      content_category: 'Summer Camp 2026',
+    });
+  });
+
+  // LocationSelected — location dropdown change inside modal
+  document.getElementById('f-location').addEventListener('change', function() {
+    if (!this.value) return;
+    if (window.fbq) fbq('trackCustom', 'LocationSelected', {
+      location:         this.value,
+      content_category: 'Summer Camp 2026',
+    });
+  });
+
+  // ScrollDepth — 50% and 90% (fires once each, passive listener)
+  var scrollFired = { 50: false, 90: false };
+  window.addEventListener('scroll', function() {
+    var pct = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
+    if (!scrollFired[50] && pct >= 50) {
+      scrollFired[50] = true;
+      if (window.fbq) fbq('trackCustom', 'ScrollDepth', { depth: '50%', page: 'Summer Camp' });
+    }
+    if (!scrollFired[90] && pct >= 90) {
+      scrollFired[90] = true;
+      if (window.fbq) fbq('trackCustom', 'ScrollDepth', { depth: '90%', page: 'Summer Camp' });
+    }
+  }, { passive: true });
+
 })();
 </script>
 
